@@ -1,1 +1,1 @@
-# Sentiment-Analysis-Emotion-Detection-using-NTLTK
+# Sentiment-Analysis-Emotion-Detection
