@@ -1,6 +1,8 @@
 # Sentiment-Analysis-Emotion-Detection
+## Introduction
 Emotion detection and sentiment analysis are two rapidly advancing subfields of Natural Language Processing (NLP) that focus on understanding human emotions and opinions expressed in text or other forms of data. Sentiment analysis traditionally aims to classify textual data into positive, negative, or neutral sentiments, while emotion detection dives deeper by identifying specific emotions such as joy, anger, sadness, or surprise. These technologies have become pivotal in areas such as social media analysis, customer feedback systems, and even mental health monitoring. As the volume of user-generated content continues to increase, the need for systems capable of interpreting and responding to human emotions in real-time has grown substantially.
-# Objectives
+
+## Objectives
 • Develop a machine learning model to classify text into general sentiment categories such as positive, negative, or neutral.
 
 • Ensure that the sentiment analysis model performs well across diverse datasets, including customer reviews, social media comments, and news articles.
