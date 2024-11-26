@@ -21,6 +21,7 @@ Emotion detection and sentiment analysis are two rapidly advancing subfields of 
 
 ## Current Features
 • Currently able to predict the sentiment as positive, neutral, negative on basis of presence of some words that commonly used in positive or negative context whereas the neutral sentiment is decided on the basis of absence of those words (both negative and positive).
+
 • Emotion Detection use NLTK python library for its NLP features, preprocessing of texts and a dataset consisting of words and the respective emotion that it shows in that textual context.
 
 
