@@ -1,4 +1,5 @@
 import os
+import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -55,6 +56,10 @@ y_proba = classifier.predict_proba(X_test)  # Get probabilities for both classes
 
 # Extract the probability of the positive sentiment (class 1)
 scores = y_proba[:, 1]  # Positive sentiment probabilities
+
+# Save the model and vectorizer for deployment
+joblib.dump(classifier, "model.pkl")
+joblib.dump(tfidf_vectorizer, "vectorizer.pkl")
 
 # Interpret scores and assign sentiment categories
 for idx, score in enumerate(scores):
