@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentiment Analysis</title>
+    <title>Sentiment & Emotion Analysis</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         #result { margin-top: 20px; }
     </style>
 </head>
 <body>
-    <h1>Sentiment Analysis</h1>
+    <h1>Sentiment & Emotion Analysis</h1>
     <textarea id="textInput" rows="5" cols="50" placeholder="Enter your text here..."></textarea>
     <br>
-    <button onclick="analyzeSentiment()">Analyze Sentiment</button>
+    <button onclick="analyzeText()">Analyze</button>
     <button onclick="startSpeechToText()">🎤 Speak</button>
 
     <div id="result"></div>
 
     <script>
-        function analyzeSentiment() {
+        function analyzeText() {
             const textInput = document.getElementById("textInput").value;
             fetch("/predict", {
                 method: "POST",
@@ -31,10 +31,26 @@
                 if (data.error) {
                     alert(data.error);
                 } else {
+                    const sentiment = data.sentiment;
+                    const emotions = data.emotions;
+
+                    let emotionOutput = "";
+                    if (Object.keys(emotions).length === 0) {
+                        emotionOutput = "<p>No emotions detected.</p>";
+                    } else {
+                        emotionOutput = "<ul>";
+                        for (const [emotion, count] of Object.entries(emotions)) {
+                            emotionOutput += `<li>${emotion.charAt(0).toUpperCase() + emotion.slice(1)}: ${count}</li>`;
+                        }
+                        emotionOutput += "</ul>";
+                    }
+
                     document.getElementById("result").innerHTML = `
                         <p><strong>Text:</strong> ${data.text}</p>
-                        <p><strong>Score:</strong> ${data.score.toFixed(2)}</p>
-                        <p><strong>Sentiment:</strong> ${data.sentiment}</p>
+                        <p><strong>Sentiment Score:</strong> ${sentiment.score.toFixed(2)}</p>
+                        <p><strong>Sentiment:</strong> ${sentiment.sentiment}</p>
+                        <p><strong>Emotions Detected:</strong></p>
+                        ${emotionOutput}
                     `;
                 }
             })
