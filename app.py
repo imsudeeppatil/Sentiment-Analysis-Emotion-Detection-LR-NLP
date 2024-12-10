@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify, render_template
 import joblib
 import pickle
-from collections import Counter
 import string
 from nltk.stem import WordNetLemmatizer
+import matplotlib.pyplot as plt
+import io
+import base64
 
 app = Flask(__name__)
 
@@ -11,14 +13,21 @@ app = Flask(__name__)
 classifier = joblib.load('model.pkl')
 tfidf_vectorizer = joblib.load('vectorizer.pkl')
 
-# Load the emotion detection model
-with open("emotion_model.pkl", "rb") as emotion_file:
-    emotion_model = pickle.load(emotion_file)
+# Load the updated emotion detection model and vectorizer
+emotion_model = joblib.load('emotion_model.pkl')
+emotion_vectorizer = joblib.load('emotion_vectorizer.pkl')
 
-print("Emotion model loaded with keys:", list(emotion_model.keys())[:10])  # Debug print
+print("Emotion detection model and vectorizer loaded.")  # Debug print
 
-# Initialize lemmatizer
-lemmatizer = WordNetLemmatizer()
+# Emotion mapping
+EMOTION_MAP = {
+    0: "anger",
+    1: "fear",
+    2: "joy",
+    3: "love",
+    4: "sadness",
+    5: "surprise"
+}
 
 @app.route("/")
 def home():
@@ -32,44 +41,54 @@ def predict():
 
     print("Raw input text:", input_text)  # Debug print
 
-    # Preprocess text
-    words = input_text.lower().translate(str.maketrans("", "", string.punctuation)).split()
-    print("Processed words:", words)  # Debug print
-
-    # Lemmatize words to match base form
-    lemmatized_words = [lemmatizer.lemmatize(word) for word in words]
-    print("Lemmatized words:", lemmatized_words)  # Debug print
-
-    # Match words with emotions
-    detected_emotions = [emotion_model.get(word, None) for word in lemmatized_words]
-    detected_emotions = [emotion for emotion in detected_emotions if emotion is not None]
-    print("Detected emotions:", detected_emotions)  # Debug print
-
-    # Count emotions
-    emotion_counter = Counter(detected_emotions)
-    print("Emotion counter:", emotion_counter)  # Debug print
-
     # Sentiment analysis
     input_features = tfidf_vectorizer.transform([input_text])
     y_proba = classifier.predict_proba(input_features)
-    positive_score = y_proba[0][1]
+    positive_score = float(y_proba[0][1])  # Convert np.float64 to float
     sentiment = "Neutral"
     if positive_score < 0.4:
         sentiment = "Negative"
     elif positive_score > 0.6:
         sentiment = "Positive"
 
+    # Emotion detection
+    emotion_features = emotion_vectorizer.transform([input_text])
+    emotion_prediction = emotion_model.predict(emotion_features)
+    emotion_probabilities = emotion_model.predict_proba(emotion_features).flatten()
+
+    # Create barplot for emotions
+    fig, ax = plt.subplots()
+    emotions = [EMOTION_MAP[i] for i in range(len(emotion_probabilities))]
+    ax.bar(emotions, emotion_probabilities, color='skyblue')
+    ax.set_title("Emotion Probabilities")
+    ax.set_ylabel("Probability")
+    ax.set_xlabel("Emotions")
+    plt.tight_layout()
+
+    # Save the plot to a bytes buffer
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    buf.seek(0)
+    base64_image = base64.b64encode(buf.getvalue()).decode("utf-8")
+    buf.close()
+
+    # Map numeric label to emotion name
+    dominant_emotion_index = int(emotion_prediction[0])  # Ensure JSON serializable
+    dominant_emotion = EMOTION_MAP.get(dominant_emotion_index, "Unknown")  # Map to emotion name
+
     # Debug: print out what we are sending to the frontend
     print("Returning response:", {
         "text": input_text,
         "sentiment": {"score": positive_score, "sentiment": sentiment},
-        "emotions": dict(emotion_counter)
+        "dominant_emotion": {"emotion": dominant_emotion},
+        "emotion_plot": "data:image/png;base64," + base64_image
     })
 
     return jsonify({
         "text": input_text,
         "sentiment": {"score": positive_score, "sentiment": sentiment},
-        "emotions": dict(emotion_counter)
+        "dominant_emotion": {"emotion": dominant_emotion},
+        "emotion_plot": "data:image/png;base64," + base64_image
     })
 
 if __name__ == "__main__":
