@@ -156,6 +156,7 @@
     <div>
       <button onclick="analyzeText()">Analyze</button>
       <button onclick="startSpeechToText()">🎤 Speak</button>
+      <button onclick="resetPage()">🔄 Refresh</button>
     </div>
     <div id="result"></div>
     <img id="emotionPlot" alt="Emotion Bar Plot" style="display: none;" />
@@ -209,6 +210,11 @@
 
       function toggleTheme() {
         document.body.classList.toggle("dark");
+      }
+
+      function resetPage() {
+        // Reload the page to reset its state
+        location.reload();
       }
     </script>
   </body>
