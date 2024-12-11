@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 
-def load_text_files_with_unsup(base_directory):
+def load_text_files(base_directory):
     """
     Load text files from the 'neg' and 'pos' folders in the specified directory.
     - 'neg': Contains negative sentiment files, labeled as 0.
@@ -37,7 +37,7 @@ def load_text_files_with_unsup(base_directory):
 
 # Load text data and labels
 base_directory = r"E:\Python\Sentiment-Analysis-NN\Sentiment\train"
-texts, labels = load_text_files_with_unsup(base_directory)
+texts, labels = load_text_files(base_directory)
 
 # Initialize TF-IDF Vectorizer for feature extraction
 tfidf_vectorizer = TfidfVectorizer(max_features=5000, stop_words='english')
