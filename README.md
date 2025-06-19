@@ -34,34 +34,34 @@ project/
 
 ## 🧠 ML Models Used
 
-### Sentiment Analysis:
-- **Algorithm**: Logistic Regression
-- **Input**: Text (processed with TF-IDF)
-- **Output**: Sentiment Score + Category
+### Sentiment Analysis:  
+- **Algorithm**: Logistic Regression  
+- **Input**: Text (processed with TF-IDF)  
+- **Output**: Sentiment Score + Category  
 
-### Emotion Detection:
-- **Algorithm**: Logistic Regression (Multiclass)
-- **Emotions**: Joy, Anger, Sadness, Fear, Love, Surprise
+### Emotion Detection:  
+- **Algorithm**: Logistic Regression (Multiclass)  
+- **Emotions**: Joy, Anger, Sadness, Fear, Love, Surprise  
 
-## 🖼️ Features
+## 🖼️ Features  
 
-- TF-IDF vectorization for feature extraction
-- Speech-to-Text input support
-- Flask-based web interface with theme toggle
-- Real-time bar graph showing emotion distribution
-- Score interpretation for sentiments
-- Saved models for quick deployment using `joblib`
+- TF-IDF vectorization for feature extraction  
+- Speech-to-Text input support   
+- Flask-based web interface with theme toggle  
+- Real-time bar graph showing emotion distribution  
+- Score interpretation for sentiments  
+- Saved models for quick deployment using `joblib`  
 
-## 🚀 How to Run
+## 🚀 How to Run  
 
-1. **Install dependencies**:
-   pip install -r requirements.txt
-**2.** **Train the models**:
-   python Sentiment_Analysis.py
-   python Emotion_Detection.py
-**3.** **Run Flask Application**:
-   python app.py
-**4.** Visit: http://localhost:5000 in your browser.
+1. **Install dependencies**:  
+   pip install -r requirements.txt  
+**2.** **Train the models**:  
+   python Sentiment_Analysis.py  
+   python Emotion_Detection.py  
+**3.** **Run Flask Application**:  
+   python app.py  
+**4.** Visit: http://localhost:5000 in your browser.  
 
 ## 📈 Results
 Sentiment Accuracy: ~88%
