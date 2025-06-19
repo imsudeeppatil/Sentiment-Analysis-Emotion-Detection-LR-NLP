@@ -80,9 +80,9 @@ Best performance for Sadness and Joy, with areas to improve for Love and Surpris
 - Enable advanced visualization using Plotly or D3.js.
 
 ## 👨‍💻 Contributors
-- Sneha R
-- Sudeep Patil 
-- Thushar DM
-- Vinayak Rajput
-  
+- [Sneha R](https://github.com/SNEHARAJU21)
+- [Sudeep Patil](https://github.com/imsudeeppatil)
+- [Thushar D M](https://github.com/Thushardm)
+- [Vinayak Rajput](https://github.com/Vinayak-Rajput)
+
 Guided by: Prof. Sunanda H G, Assistant Professor, Dept. of CSE, BIT
