@@ -19,7 +19,7 @@ This mini project uses **Machine Learning** and **Natural Language Processing (N
 
 ## 📂 Project Structure
 
-project/
+project/  
 ├── templates/  
 │ └── index.html # Web interface  
 ├── model.pkl # Sentiment analysis model  
