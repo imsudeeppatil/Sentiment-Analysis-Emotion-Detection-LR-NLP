@@ -20,16 +20,16 @@ This mini project uses **Machine Learning** and **Natural Language Processing (N
 ## 📂 Project Structure
 
 project/
-├── templates/
-│ └── index.html # Web interface
-├── model.pkl # Sentiment analysis model
-├── emotion_model.pkl # Emotion detection model
-├── vectorizer.pkl # Sentiment TF-IDF vectorizer
-├── emotion_vectorizer.pkl # Emotion TF-IDF vectorizer
-├── app.py # Flask backend
-├── Sentiment_Analysis.py # Script for training sentiment model
-├── Emotion_Detection.py # Script for training emotion model
-└── merged_training.pkl # Dataset for emotion detection
+├── templates/  
+│ └── index.html # Web interface  
+├── model.pkl # Sentiment analysis model  
+├── emotion_model.pkl # Emotion detection model  
+├── vectorizer.pkl # Sentiment TF-IDF vectorizer  
+├── emotion_vectorizer.pkl # Emotion TF-IDF vectorizer  
+├── app.py # Flask backend  
+├── Sentiment_Analysis.py # Script for training sentiment model  
+├── Emotion_Detection.py # Script for training emotion model  
+└── merged_training.pkl # Dataset for emotion detection  
 
 
 ## 🧠 ML Models Used
