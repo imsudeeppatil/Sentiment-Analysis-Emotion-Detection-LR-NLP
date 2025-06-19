@@ -56,17 +56,22 @@ project/
 
 **1.** **Install dependencies**:  
    pip install -r requirements.txt  
+   
 **2.** **Train the models**:  
    python Sentiment_Analysis.py  
    python Emotion_Detection.py  
+
 **3.** **Run Flask Application**:  
    python app.py  
+
 **4.** Visit: http://localhost:5000 in your browser.  
 
-## 📈 Results
-Sentiment Accuracy: ~88%
-Emotion Accuracy (Weighted F1-Score): ~90%
-Best performance for Sadness and Joy, with areas to improve for Love and Surprise.
+## 📈 Results  
+
+**Sentiment Accuracy:** ~88%  
+**Emotion Accuracy (Weighted F1-Score):** ~90%  
+
+Best performance for Sadness and Joy, with areas to improve for Love and Surprise.  
 
 ## 🧩 Future Scope
 - Integrate deep learning models (BERT, LSTM).
